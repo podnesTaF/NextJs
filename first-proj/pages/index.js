@@ -2,16 +2,28 @@
 
 import React from 'react';
 import EventList from '../components/events/EventList';
-import { getFeaturedEvents } from '../dummy-data';
+import { getFeaturedEvents } from '../helpers/api-util';
+import Head from 'next/head';
 
-const StartingPage = () => {
-  const featuredEvents = getFeaturedEvents();
-
+const StartingPage = ({ events }) => {
   return (
     <div>
-      <EventList items={featuredEvents} />
+      <Head>
+        <title>Next try</title>
+      </Head>
+      <EventList items={events} />
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const featuredEvents = await getFeaturedEvents();
+
+  return {
+    props: {
+      events: featuredEvents,
+    },
+  };
+}
 
 export default StartingPage;
