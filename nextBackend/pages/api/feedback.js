@@ -16,7 +16,6 @@ function handler(req, res) {
   if (req.method === 'POST') {
     const email = req.body.email;
     const text = req.body.text;
-    console.log(text);
 
     const newFeedback = {
       id: new Date().toISOString(),
